@@ -33,7 +33,7 @@ get_landform_xyz <- function(xtile, ytile, zoom) {
 #' @examples
 #' bbox <- c("xmin" = 143.042, "ymin" = 42.908,
 #'           "xmax" = 143.086, "ymax" = 42.924)
-#' get_fgd_landform(bbox)
+#' \dontrun{get_fgd_landform(bbox)}
 get_fgd_landform <- function(geom, zoom = 14) {
   bbox <- numeric(4)
   if (is(geom, "bbox")) {

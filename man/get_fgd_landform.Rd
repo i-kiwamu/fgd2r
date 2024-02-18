@@ -20,5 +20,5 @@ To get FGD landform vector.
 \examples{
 bbox <- c("xmin" = 143.042, "ymin" = 42.908,
           "xmax" = 143.086, "ymax" = 42.924)
-get_fgd_landform(bbox)
+\dontrun{get_fgd_landform(bbox)}
 }
