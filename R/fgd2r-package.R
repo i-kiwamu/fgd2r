@@ -1,0 +1,45 @@
+#' fgd2r: Reading Fundamental Geospatial Data
+#'
+#' This package enables to read fundamental geospatial data of GSI Japan, such as DEM, Landform, etc.
+#'
+## usethis namespace: start
+#' @importFrom brio read_file
+#' @importFrom dplyr case_when
+#' @importFrom dplyr if_else
+#' @importFrom dplyr left_join
+#' @importFrom dplyr mutate
+#' @importFrom dplyr nest_by
+#' @importFrom dplyr rename
+#' @importFrom dplyr ungroup
+#' @importFrom geojsonsf geojson_sf
+#' @importFrom magrittr %>%
+#' @importFrom methods is
+#' @importFrom purrr map
+#' @importFrom purrr pmap
+#' @importFrom purrr reduce
+#' @importFrom sf st_agr<-
+#' @importFrom sf st_as_sf
+#' @importFrom sf st_bbox
+#' @importFrom sf st_union
+#' @importFrom stringr str_extract
+#' @importFrom stringr str_glue
+#' @importFrom stringr str_length
+#' @importFrom stringr str_split_1
+#' @importFrom stringr str_split_fixed
+#' @importFrom stringr str_sub
+#' @importFrom stringr str_subset
+#' @importFrom stringr str_trim
+#' @importFrom terra merge
+#' @importFrom terra rast
+#' @importFrom terra sprc
+#' @importFrom terra values
+#' @importFrom terra values<-
+#' @importFrom tidyr expand_grid
+#' @importFrom utils unzip
+#' @importFrom xml2 read_xml
+#' @importFrom xml2 xml_contents
+#' @importFrom xml2 xml_find_all
+#' @importFrom xml2 xml_text
+## usethis namespace: end
+"_PACKAGE"
+NULL

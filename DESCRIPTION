@@ -1,0 +1,30 @@
+Package: fgd2r
+Title: Reading Fundamental Geospatial Data
+Version: 0.0.0.9000
+Authors@R: 
+    person("Kiwamu", "Ishikura", , "ishikura.kiwamu@gmail.com", role = c("aut", "cre"))
+Description: This package enables to read fundamental geospatial data of GSI Japan, such as DEM, Landform, etc.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.1
+Imports: 
+    brio,
+    dplyr,
+    geojsonsf,
+    magrittr,
+    methods,
+    purrr,
+    rlang,
+    sf,
+    stringr,
+    terra,
+    tibble,
+    tidyr,
+    utils,
+    xml2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 2.10)
