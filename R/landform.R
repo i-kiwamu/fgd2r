@@ -29,7 +29,7 @@ get_landform_xyz <- function(xtile, ytile, zoom) {
 #' @importFrom methods is
 #' @importFrom rlang .data
 #' @importFrom dplyr case_when nest_by ungroup select left_join
-#' @importFrom sf st_bbox st_union st_as_sf st_crs st_transform st_crop
+#' @importFrom sf st_bbox st_union st_as_sf st_crs st_transform st_crop st_agr<-
 #' @importFrom tidyr expand_grid
 #' @importFrom purrr pmap reduce discard
 #' @export
@@ -72,7 +72,7 @@ get_fgd_landform <- function(geom, zoom = 14) {
     discard(is.null)
 
   if(length(list_landform) > 0) {
-    list_landform %>%
+    sf_landform <- list_landform %>%
       reduce(rbind) %>%
       nest_by(.data$code) %>%
       mutate(geometry = st_union(.data$data)) %>%
