@@ -13,8 +13,11 @@ get_landform_xyz <- function(xtile, ytile, zoom) {
   url <- str_glue(
     "https://cyberjapandata.gsi.go.jp/xyz/experimental_landformclassification1/{zoom}/{xtile}/{ytile}.geojson"
   )
-  suppressWarnings(sf_landform <- geojson_sf(url))
-  return(sf_landform)
+  sf_landform <- tryCatch({
+    return(suppressWarnings(geojson_sf(url)))
+  }, error = \(e) {
+    return(NULL)
+  })
 }
 
 
@@ -28,7 +31,7 @@ get_landform_xyz <- function(xtile, ytile, zoom) {
 #' @importFrom dplyr case_when nest_by ungroup select left_join
 #' @importFrom sf st_bbox st_union st_as_sf st_crs st_transform st_crop
 #' @importFrom tidyr expand_grid
-#' @importFrom purrr pmap reduce
+#' @importFrom purrr pmap reduce discard
 #' @export
 #' @examples
 #' bbox <- c("xmin" = 143.042, "ymin" = 42.908,
@@ -66,6 +69,7 @@ get_fgd_landform <- function(geom, zoom = 14) {
     expand_grid(xs = xy_ll[1L]:xy_ur[1L],
                 ys = xy_ll[2L]:xy_ur[2L]) %>%
     pmap(\(xs, ys) get_landform_xyz(xs, ys, zoom)) %>%
+    discard(is.null) %>%
     reduce(rbind) %>%
     nest_by(.data$code) %>%
     mutate(geometry = st_union(.data$data)) %>%
