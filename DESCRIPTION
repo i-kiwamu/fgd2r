@@ -1,6 +1,6 @@
 Package: fgd2r
 Title: Reading Fundamental Geospatial Data
-Version: 0.1
+Version: 0.1.1
 Authors@R: 
     person("Kiwamu", "Ishikura", , "ishikura.kiwamu@gmail.com", role = c("aut", "cre"))
 Description: Read and get fundamental geospatial data of GSI Japan, such as DEM, landform, etc.

@@ -65,18 +65,25 @@ get_fgd_landform <- function(geom, zoom = 14) {
   xy_ll <- deg2num(bbox["ymin"], bbox["xmin"], zoom)  # (xtile, ytile) at lower left
   xy_ur <- deg2num(bbox["ymax"], bbox["xmax"], zoom)  # (xtile, ytile) at upper right
 
-  sf_landform <-
+  list_landform <-
     expand_grid(xs = xy_ll[1L]:xy_ur[1L],
                 ys = xy_ll[2L]:xy_ur[2L]) %>%
     pmap(\(xs, ys) get_landform_xyz(xs, ys, zoom)) %>%
-    discard(is.null) %>%
-    reduce(rbind) %>%
-    nest_by(.data$code) %>%
-    mutate(geometry = st_union(.data$data)) %>%
-    ungroup() %>%
-    dplyr::select(-.data$data) %>%
-    left_join(df_landform, by = "code") %>%  # df_landform is internal tibble object stored in R/sysdata.rda.
-    st_as_sf()
-  st_agr(sf_landform) <- "constant"
-  return(st_crop(sf_landform, bbox))
+    discard(is.null)
+
+  if(length(list_landform) > 0) {
+    list_landform %>%
+      reduce(rbind) %>%
+      nest_by(.data$code) %>%
+      mutate(geometry = st_union(.data$data)) %>%
+      ungroup() %>%
+      dplyr::select(-.data$data) %>%
+      left_join(df_landform, by = "code") %>%  # df_landform is internal tibble object stored in R/sysdata.rda.
+      st_as_sf()
+    st_agr(sf_landform) <- "constant"
+    return(st_crop(sf_landform, bbox))
+  } else {
+    print("ERROR: Any landform is not provided in the target area.")
+    return(NULL)
+  }
 }
